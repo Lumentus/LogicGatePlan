@@ -6,18 +6,31 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JToolBar;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.Button;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Canvas;
 import java.awt.Color;
+
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.JSeparator;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+
+import logicGatePlan.*;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
@@ -69,6 +82,18 @@ public class MainWindow {
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		
+		JMenuItem mntmTest = new JMenuItem("Test");
+		mntmTest.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(SwingUtilities.isLeftMouseButton(e) )
+				{
+					JOptionPane.showMessageDialog(null, "Test");
+				}
+			}
+		});
+		menuBar.add(mntmTest);
 		
 		JSplitPane splitPane = new JSplitPane();
 		frmGateplan.getContentPane().add(splitPane, BorderLayout.CENTER);
