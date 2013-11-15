@@ -66,6 +66,10 @@ public class MainWindow {
     frmGateplan.getContentPane().add(createSplitPane(), BorderLayout.CENTER);
   }
 
+  /**
+   * Creates the Menu of the window
+   * @return The menu
+   */
   public JMenuBar createMenu() {
     JMenuBar menuBar = new JMenuBar();
 
@@ -97,6 +101,10 @@ public class MainWindow {
     return menuBar;
   }
 
+  /**
+   * Creates the split pane with its contents
+   * @return the splitpane
+   */
   public JSplitPane createSplitPane() {
     JSplitPane splitPane = new JSplitPane();
 
@@ -115,8 +123,13 @@ public class MainWindow {
     return splitPane;
   }
 
+  /**
+   * Creates the Toolbar on the left side of the window
+   * @return The toolbar
+   */
   public JToolBar createToolbar() {
     JToolBar toolBar = new JToolBar();
+    toolBar.setFloatable(false);
     toolBar.setOrientation(SwingConstants.VERTICAL);
 
     JLabel lblAbhdawwad = new JLabel("abhdawwad");
