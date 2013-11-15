@@ -3,12 +3,9 @@ package Windows;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -23,7 +20,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import logicGatePlan.AndGate;
-import logicGatePlan.PlanView;
 
 public class MainWindow {
 
@@ -32,6 +28,7 @@ public class MainWindow {
 
   /**
    * Launch the application.
+   * @param args Main Methods args
    */
   public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
@@ -64,8 +61,13 @@ public class MainWindow {
     frmGateplan.setBounds(100, 100, 697, 503);
     frmGateplan.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    frmGateplan.setJMenuBar(createMenu());
+
+    frmGateplan.getContentPane().add(createSplitPane(), BorderLayout.CENTER);
+  }
+
+  public JMenuBar createMenu() {
     JMenuBar menuBar = new JMenuBar();
-    frmGateplan.setJMenuBar(menuBar);
 
     JMenu mnFile = new JMenu("File");
     menuBar.add(mnFile);
@@ -75,6 +77,9 @@ public class MainWindow {
 
     JMenu mnComponents = new JMenu("Components");
     menuBar.add(mnComponents);
+
+    JMenuItem mntmAndgate = new JMenuItem("And2-Gate");
+    mnComponents.add(mntmAndgate);
 
     JMenu mnHelp = new JMenu("Help");
     menuBar.add(mnHelp);
@@ -89,55 +94,36 @@ public class MainWindow {
       }
     });
     menuBar.add(mntmTest);
+    return menuBar;
+  }
 
+  public JSplitPane createSplitPane() {
     JSplitPane splitPane = new JSplitPane();
-    frmGateplan.getContentPane().add(splitPane, BorderLayout.CENTER);
 
-    JToolBar toolBar = new JToolBar();
-    toolBar.setOrientation(SwingConstants.VERTICAL);
-    splitPane.setLeftComponent(toolBar);
+    splitPane.setLeftComponent(createToolbar());
 
-    JLabel lblAbhdawwad = new JLabel("abhdawwad");
-    toolBar.add(lblAbhdawwad);
+    planView = new PlanView(1.0);
 
-    JLabel lblNewLabel = new JLabel("New label");
-    toolBar.add(lblNewLabel);
+    planView.initializeEvents();
 
-    planView = new PlanView(0, 0, 1.0);
-    planView.addMouseMotionListener(new MouseMotionAdapter() {
-      @Override
-      public void mouseDragged(MouseEvent e) {
-        Component temp;
-        Point offset;
-        if ((temp = planView.getSelectedComponent()) != null && (offset = planView.getDragOffset()) != null) {
-          temp.setLocation(e.getX() - offset.x, e.getY() - offset.y);
-        }
-      }
-    });
-    planView.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mousePressed(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e)) {
-          Point clickLoc = new Point(e.getX(), e.getY());
-          Component temp = planView.getComponentAt(clickLoc.x, clickLoc.y);
-          planView.setSelectedComponent(temp);
-          planView.setDragOffset(new Point(clickLoc.x - temp.getX(), clickLoc.y - temp.getY()));
-        }
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e)) {
-          planView.setSelectedComponent(null);
-          planView.setDragOffset(null);
-        }
-      }
-    });
     planView.setBackground(Color.WHITE);
     planView.setLayout(null);
     AndGate andGate = new AndGate();
     andGate.setBounds(290, 5, 34, 34);
     planView.add(andGate);
     splitPane.setRightComponent(planView);
+    return splitPane;
+  }
+
+  public JToolBar createToolbar() {
+    JToolBar toolBar = new JToolBar();
+    toolBar.setOrientation(SwingConstants.VERTICAL);
+
+    JLabel lblAbhdawwad = new JLabel("abhdawwad");
+    toolBar.add(lblAbhdawwad);
+
+    JLabel lblNewLabel = new JLabel("New label");
+    toolBar.add(lblNewLabel);
+    return toolBar;
   }
 }

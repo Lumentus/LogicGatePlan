@@ -7,8 +7,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * The basic AND Gate
+ * @author Lumentus
+ */
 public class AndGate extends BasicGate {
 
+  private static final long serialVersionUID = -5240126077200731030L;
+
+  /**
+   * This constructor creates a standard AND-gate
+   */
   public AndGate() {
     super();
     try {
