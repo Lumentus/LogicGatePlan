@@ -1,12 +1,11 @@
 
 package logicGatePlan;
 
-import java.awt.Point;
 
 public class OrGate extends BasicGate {
 
-  public OrGate(Point position) {
-    super(position);
+  public OrGate() {
+    super();
   }
 
   @Override

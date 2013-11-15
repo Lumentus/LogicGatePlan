@@ -1,12 +1,11 @@
 
 package logicGatePlan;
 
-import java.awt.Point;
 
 public class NotGate extends BasicGate {
 
-  public NotGate(Point position) {
-    super(position, 1);
+  public NotGate() {
+    super(1);
   }
 
   @Override

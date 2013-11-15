@@ -1,20 +1,18 @@
 
 package logicGatePlan;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Gate extends Component {
+public abstract class Gate extends LogicComponent {
   protected int numOfInputs;
   protected List<Boolean> inputs;
 
-  public Gate(Point position) {
-    this(position, 2);
+  public Gate() {
+    this(2);
   }
 
-  public Gate(Point position, int numOfInputs) {
-    super(position);
+  public Gate(int numOfInputs) {
     this.numOfInputs = numOfInputs;
     this.inputs = new ArrayList<Boolean>();
     for (int i = 0; i < this.numOfInputs; i++) {

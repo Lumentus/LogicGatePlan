@@ -1,12 +1,21 @@
 
 package logicGatePlan;
 
-import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class AndGate extends BasicGate {
 
-  public AndGate(Point position) {
-    super(position);
+  public AndGate() {
+    super();
+    try {
+      this.setIcon(new ImageIcon(ImageIO.read(new File("D:\\Daten\\lukas.hansen\\Desktop\\test.png"))));
+    } catch (IOException e) {
+      System.out.println("WTF");
+    }
   }
 
   @Override
